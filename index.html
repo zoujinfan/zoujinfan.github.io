@@ -110,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/05/22/hello-world/" data-id="cmazjyabl00012j6oh6ud2u35" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/05/22/hello-world/" data-id="cmazk6bcs00015m6obzmpeddk" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -156,9 +156,11 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. 本地准备hexo项目</span><br><span class="line">mkdir ~/my-hexo-blog</span><br><span class="line">cd ~/my-hexo-blog</span><br><span class="line">hexo init</span><br><span class="line">npm install --根据 package.json 文件，自动下载并安装项目所需的所有依赖库（比如 Hexo 本体、主题插件、部署工具等）</span><br><span class="line"></span><br><span class="line">2. hexo配置文件中配置部署。编辑根目录 _config.yml，找到 deploy 部分，改成：</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:你的用户名/你的用户名.github.io.git</span><br><span class="line">  branch: main</span><br><span class="line"></span><br><span class="line">3. 安装 Hexo Git 部署插件</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
 <p>typora写.md文件，文章开头写好 Front Matter ，文件保存在source&#x2F;_posts下 —&gt; 本地生成和预览博客（浏览器访问 <code>http://localhost:4000</code> 看效果）—&gt; 部署上线到GitHub（静态文件推送到仓库的指定分支main）—&gt; 几分钟后，访问线上博客（<a target="_blank" rel="noopener" href="https://zoujinfan.github.io)/">https://zoujinfan.github.io）</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo server</span><br><span class="line"></span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo server</span><br><span class="line"></span><br><span class="line">hexo deploy （或 hexo clean &amp;&amp; hexo g &amp;&amp; hexo d）</span><br></pre></td></tr></table></figure>
 
-<h3 id="三、背后原理介绍"><a href="#三、背后原理介绍" class="headerlink" title="三、背后原理介绍"></a>三、背后原理介绍</h3><ul>
+<h3 id="三、问题解决"><a href="#三、问题解决" class="headerlink" title="三、问题解决"></a>三、问题解决</h3><p>问题：本地新增了一个文件，本地预览无问题，远程推送无更新。</p>
+<p>解决：文件名是中文，导致了路径问题。将文件名改成了英文后重试成功。</p>
+<h3 id="四、背后原理介绍"><a href="#四、背后原理介绍" class="headerlink" title="四、背后原理介绍"></a>四、背后原理介绍</h3><ul>
 <li><p>Node.js是一个JavaScript<u>运行环境</u>，可以在 <u>本地电脑&#x2F;服务器</u> 上运行 <u>JavaScript应用程序</u></p>
 </li>
 <li><p>Hexo 是一个用Node.js编写的博客框架；Hexo 是一个Node.js应用，没有Node.js就无法启动Hexo命令（hexo init 都是Node.js脚本在跑）</p>
@@ -174,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/05/22/geren-blog-jiaocheng/" data-id="cmazjyabh00002j6o0fx79n1w" data-title="个人博客搭建教程" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/05/22/geren-blog-jiaocheng/" data-id="cmazk6bcp00005m6oeulm8m3u" data-title="个人博客搭建教程" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
