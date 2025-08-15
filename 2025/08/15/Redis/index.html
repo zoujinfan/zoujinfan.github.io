@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Redis介绍 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本人在运维项目中担任OA角色，运维过程中涉及Redis数据库知识。本文主要对书籍《Redis实战》进行大致了解，对OA需了解的知识点进行梳理整理，主要总结基本概念，实战部分咱不涉及。 一、初识Redis Redis简单介绍  相对于普通数据库（mysql）数据存在硬盘，Redis是存在内存中。 -&gt; 特点：访问速度快 -&gt; 适用场景：存临时的、需快速访问的数据。例如：游戏排行榜、视频播">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis介绍">
+<meta property="og:url" content="http://example.com/2025/08/15/Redis/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本人在运维项目中担任OA角色，运维过程中涉及Redis数据库知识。本文主要对书籍《Redis实战》进行大致了解，对OA需了解的知识点进行梳理整理，主要总结基本概念，实战部分咱不涉及。 一、初识Redis Redis简单介绍  相对于普通数据库（mysql）数据存在硬盘，Redis是存在内存中。 -&gt; 特点：访问速度快 -&gt; 适用场景：存临时的、需快速访问的数据。例如：游戏排行榜、视频播">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Users/zoujinfan/Library/Application%20Support/typora-user-images/image-20250815144423375.png">
+<meta property="og:image" content="http://example.com/Users/zoujinfan/Library/Application%20Support/typora-user-images/image-20250815151355790.png">
+<meta property="og:image" content="http://example.com/Users/zoujinfan/Library/Application%20Support/typora-user-images/image-20250815163113839.png">
+<meta property="og:image" content="http://example.com/Users/zoujinfan/Library/Application%20Support/typora-user-images/image-20250815162640548.png">
+<meta property="og:image" content="http://example.com/Users/zoujinfan/Library/Application%20Support/typora-user-images/image-20250815164726816.png">
+<meta property="og:image" content="http://example.com/Users/zoujinfan/Library/Application%20Support/typora-user-images/image-20250815172340820.png">
+<meta property="og:image" content="http://example.com/Users/zoujinfan/Library/Application%20Support/typora-user-images/image-20250815172441301.png">
+<meta property="article:published_time" content="2025-08-15T06:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-15T10:25:37.799Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="书籍">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Users/zoujinfan/Library/Application%20Support/typora-user-images/image-20250815144423375.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Redis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/08/15/Redis/" class="article-date">
+  <time class="dt-published" datetime="2025-08-15T06:00:00.000Z" itemprop="datePublished">2025-08-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Redis介绍
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本人在运维项目中担任OA角色，运维过程中涉及Redis数据库知识。本文主要对书籍《Redis实战》进行大致了解，对OA需了解的知识点进行梳理整理，主要总结基本概念，实战部分咱不涉及。</p>
+<h3 id="一、初识Redis"><a href="#一、初识Redis" class="headerlink" title="一、初识Redis"></a>一、初识Redis</h3><ul>
+<li><strong>Redis简单介绍</strong></li>
+</ul>
+<p>相对于普通数据库（mysql）数据存在硬盘，Redis是存在内存中。</p>
+<p>-&gt; 特点：访问速度快</p>
+<p>-&gt; 适用场景：存临时的、需快速访问的数据。例如：游戏排行榜、视频播放量（计数器）、临时验证码（会话存储）</p>
+<ul>
+<li><strong>Azure Cache for Redis</strong></li>
+</ul>
+<p>Azure云平台提供了Redis服务，称“Azure Cache for Redis”</p>
+<img src="/Users/zoujinfan/Library/Application Support/typora-user-images/image-20250815144423375.png" alt="image-20250815144423375" style="zoom:20%;" />
+
+<p>图片解释：</p>
+<p><strong>1. 有缓存命中（Cache Hit）</strong> ✅</p>
+<ul>
+<li>request → Azure Redis</li>
+<li>Redis 里有数据 → 直接 response 给请求方</li>
+</ul>
+<p><strong>2. 缓存未命中（Cache Miss，数据库有数据）</strong> ✅</p>
+<ul>
+<li>request → Azure Redis</li>
+<li>Redis 没有数据 → 由<strong>你的应用</strong>去访问数据库</li>
+<li>数据库返回数据 → <strong>你的应用</strong>把数据写回 Redis 做缓存，然后再返回给用户</li>
+</ul>
+<blockquote>
+<p>注意：Redis <strong>不会主动去查数据库</strong>，它只负责存和取。去数据库拿数据的逻辑是你代码里写的。</p>
+</blockquote>
+<p><strong>3. 缓存未命中（数据库也没数据）</strong> ✅</p>
+<ul>
+<li>request → Azure Redis → Redis 没有</li>
+<li>应用去数据库 → 数据库也没有</li>
+<li>应用返回空给用户（通常不会往 Redis 里写空值，除非做“空缓存”防穿透）。</li>
+</ul>
+<hr>
+<h3 id="二、Redis特性（数据安全与性能保障）"><a href="#二、Redis特性（数据安全与性能保障）" class="headerlink" title="二、Redis特性（数据安全与性能保障）"></a>二、Redis特性（数据安全与性能保障）</h3><h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><p>原文表达：</p>
+<p>需要扩展读请求，或者在需要写入临时数据的时候，用户可以通过设置额外的Redis从服务器来保存数据集的副本。</p>
+<p>在接收到主服务器发送的数据初始副本（initial copy of the data）之后，客户端每次向主服务器进行写入时，从服务器都会实时地得到更新。</p>
+<p>在部署好主从服务器之后，客户端就可以向任意一个从服务器发送读请求了，而不必再像之前一样，总是把每个请求都发送给主服务器（客户端通常会随机地选择适用哪个从服务器，从而将负载平均分配到各个从服务器上）。</p>
+<img src="/Users/zoujinfan/Library/Application Support/typora-user-images/image-20250815151355790.png" alt="image-20250815151355790" style="zoom:50%;" />
+
+<p>图中说明：</p>
+<p><em>RDB 在 Redis 里是 <strong>Redis DataBase file</strong> 的缩写，指的是 <strong>快照持久化（Snapshotting）</strong> 生成的文件。</em></p>
+<p><em>从服务器在进行同步时，会清空自己的所有数据</em></p>
+<ul>
+<li><p>主从复制（Master-Slave Replication）</p>
+<p>主服务器的数据（master） 完整拷贝到 从服务器（slave）上，并且保持同步。（第一次连接时，全量复制；后续再有更新，立马主同步到从上）</p>
+<p>优点：</p>
+<ol>
+<li><p>读写分离：主机负责写，从机负责读</p>
+</li>
+<li><p>高可用：主机挂了，从机顶</p>
+</li>
+<li><p>数据备份：防止单机数据丢失</p>
+</li>
+</ol>
+<ul>
+<li><p>主从链</p>
+<p>原文表达：随着负载不断上升，主服务器可能会无法快速地更新所有从服务器，或者因为重新连接或者重新同步从服务器而导致系统超载。为了缓解这个问题，用户可以创建一个由Redis主从节点（master&#x2F;slave node）组成的中间层来分担主服务器的复制工作。</p>
+<img src="/Users/zoujinfan/Library/Application Support/typora-user-images/image-20250815163113839.png" alt="image-20250815163113839" style="zoom:50%;" />
+
+
+
+<p>选择主从链的主要场景：      </p>
+<img src="/Users/zoujinfan/Library/Application Support/typora-user-images/image-20250815162640548.png" alt="image-20250815162640548" style="zoom:50%;" /></li>
+</ul>
+</li>
+</ul>
+<h4 id="持久化（将数据存储到硬盘）"><a href="#持久化（将数据存储到硬盘）" class="headerlink" title="持久化（将数据存储到硬盘）"></a>持久化（将数据存储到硬盘）</h4><ul>
+<li><p>RDB（Redis DataBase file, 快照snapshotting持久化生成的文件，某一时刻的所有数据写入硬盘），默认文件名dump.rdb</p>
+</li>
+<li><p>AOF（append-only file, 只追加文件，在执行写命令时将被执行的写命令复制到硬盘），Redis会把每条写命令记录在日志文件（appendonly.aof）里</p>
+<img src="/Users/zoujinfan/Library/Application Support/typora-user-images/image-20250815164726816.png" alt="image-20250815164726816" style="zoom:50%;" /></li>
+</ul>
+<h3 id="三、处理系统故障"><a href="#三、处理系统故障" class="headerlink" title="三、处理系统故障"></a>三、处理系统故障</h3><ol>
+<li><p>验证持久化文件是否完好无损（无论是快照持久化还是AOF持久化），并在有需时对其修复</p>
+</li>
+<li><p>更换故障主服务器</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>简单介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Redis Sentinel</td>
+<td>当主节点故障时，Sentinel 自动检测并将某个从节点提升为新的主节点（自动故障恢复）</td>
+</tr>
+<tr>
+<td>Redis Cluster</td>
+<td>Redis Cluster 中每个主节点都有对应的从节点，主节点宕机时从节点自动接管（自动分片和故障转移，需要客户端支持）</td>
+</tr>
+<tr>
+<td>手动切换</td>
+<td>确认主节点故障，停止主节点服务，从节点提升主节点（小规模或临时应急）</td>
+</tr>
+<tr>
+<td>热备切换</td>
+<td>准备好一台新的 Redis 服务器，将新的 Redis 配置为从节点，同步数据，等待数据同步完成后，将该节点提升为主节点（手动或自动），关闭旧主节点，业务端切换到新主节点（需要平滑切换的场景）</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="四、其他知识点"><a href="#四、其他知识点" class="headerlink" title="四、其他知识点"></a>四、其他知识点</h3><ol>
+<li><p>客户端分片（client-side sharding）:指由客户端负责将数据分布到多个 Redis 实例上，而不是由 Redis 服务器自身来管理数据分片。客户端根据一定的规则（如哈希算法）决定将某个 key 存储到哪个 Redis 实例。缺乏自动故障转移，某个 Redis 节点宕机，客户端需手动处理或重新映射分片。</p>
+</li>
+<li><p>键的过期时间：通过Redis的过期时间（expiration）特性来让一个键在给定的时限（timeout）之后自动被删除。</p>
+</li>
+</ol>
+<h3 id="五、运维真实案例"><a href="#五、运维真实案例" class="headerlink" title="五、运维真实案例"></a>五、运维真实案例</h3><p>问题：微软host os升级导致Redis（缓存服务器）故障转移（failover）</p>
+<p>采取的措施：</p>
+<ol>
+<li><p>Redis CPU 高时采取重启策略，属于快速恢复服务可用性的“应急手段”，能短时间解除阻塞和异常状态。然后再重启业务服务，以重建与 Redis 的连接并刷新缓存，确保两者状态同步，保证业务稳定运行。</p>
+</li>
+<li><p>增加Redis服务副本（replica，也称“从节点”或“副本节点”），主要体现在高可用性、读性能提升，故障恢复能力增强等方面。</p>
+</li>
+<li><p>HA（High Availabilty, 高可用性），是保障服务“持续在线”的核心能力，依靠主从复制、自动故障转移、负载均衡等机制，在故障时自动或快速恢复服务，避免影响用户体验。</p>
+</li>
+</ol>
+<p>其他说明：</p>
+<p>Redis是运行在主机内存中的进程，当宿主机操作系统（Host Operation System）升级时，通常升级伴随内核升级、系统服务更新，很多升级操作必须重启才能生效，宿主机重启 redis进程就会停止。</p>
+<img src="/Users/zoujinfan/Library/Application Support/typora-user-images/image-20250815172340820.png" alt="image-20250815172340820" style="zoom:50%;" />
+
+<img src="/Users/zoujinfan/Library/Application Support/typora-user-images/image-20250815172441301.png" alt="image-20250815172441301" style="zoom:50%;" />
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/08/15/Redis/" data-id="cmecortpb00002u6o60i51uu5" data-title="Redis介绍" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/06/24/%E6%80%80%E5%BF%B5-%E7%88%B7%E7%88%B7%E9%82%B9%E5%AD%A6%E4%BF%9D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 10px;">书籍</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">May 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/08/15/Redis/">Redis介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/24/%E6%80%80%E5%BF%B5-%E7%88%B7%E7%88%B7%E9%82%B9%E5%AD%A6%E4%BF%9D/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/22/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/22/geren-blog-jiaocheng/">个人博客搭建教程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
